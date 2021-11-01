@@ -17,16 +17,45 @@ const Discussion = () => {
     // 5x => server
 /********* then cach ***********/
     useEffect(()=>{
-        axios.get('https://jsonplaceholder.typicode.com/comments')
-        .then((response)=>{
-            //console.log(response.data);
-            setComments(response.data.slice(0, 4))
-        })
-        .catch((error)=>{
-            console.log(error);
-        })
+        const getComments = async () => {
+            try {
+                const { data } = await axios.get(
+                    "https://jsonplaceholder.typicode.com/comments"
+                );
+                setComments(data.slice(0 , 4));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getComments();
     },[])
 
+
+    /*********** Async - Await *************/
+    /********** regular function *************/
+    // async function getComments() {
+    //     try {
+    //         const { data } = await axios.get(
+    //             "https://jsonplaceholder.typicode.com/comments"
+    //         );
+    //         setComments(data.slice(0 , 4));
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+
+    /********** arrow function *************/
+    // const getComments = async () => {
+    //     try {
+    //         const { data } = await axios.get(
+    //             "https://jsonplaceholder.typicode.com/comments"
+    //         );
+    //         setComments(data.slice(0 , 4));
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
     return ( 
         <main>
             <section>
