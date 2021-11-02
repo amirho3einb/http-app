@@ -8,6 +8,7 @@ import axios from "axios";
 
 const Discussion = () => {
     const [comments, setComments] = useState(null);
+    const [selectedId, setSelectedId] = useState(null);
     // how to get data?
     // 1. useEffect () => http
     // 2. CDM => get
@@ -56,12 +57,15 @@ const Discussion = () => {
     //         console.log(error);
     //     }
     // }
+    const selectCommentHandler = (id) => {
+        setSelectedId(id);
+    }
     return ( 
         <main>
             <section>
-                {comments ? comments.map(c => <Comment key={c.id} name={c.name} email={c.email}/>) : <p>loading ...</p>}
+                {comments ? comments.map(c => <Comment key={c.id} name={c.name} email={c.email} onClick={() => selectCommentHandler(c.id)}/>) : <p>loading ...</p>}
             </section>
-            <section><FullComment /></section>
+            <section><FullComment commentId={selectedId}/></section>
             <section><NewComment /></section>
         </main>
     );
