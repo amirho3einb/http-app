@@ -31,13 +31,13 @@ const Discussion = () => {
         }
         getComments();
     },[]);
-    const postCommentHandler = (comment) => {
-        axios
-        .post("http://localhost:3001/comments", comment)
-        .then((res) => axios.get("http://localhost:3001/comments"))
-        .then((res) => setComments(res.data))
-        .catch()
-    }
+    // const postCommentHandler = (comment) => {
+    //     axios
+    //     .post("http://localhost:3001/comments", comment)
+    //     .then((res) => axios.get("http://localhost:3001/comments"))
+    //     .then((res) => setComments(res.data))
+    //     .catch()
+    // }
     
     
 
@@ -76,7 +76,7 @@ const Discussion = () => {
                 {comments ? comments.map(c => <Comment key={c.id} name={c.name} email={c.email} onClick={() => selectCommentHandler(c.id)}/>) : <p>loading ...</p>}
             </section>
             <section><FullComment commentId={selectedId}/></section>
-            <section><NewComment onAddPost={postCommentHandler}/></section>
+            <section><NewComment setComments={setComments}/></section>
         </main>
     );
 }
