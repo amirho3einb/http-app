@@ -9,6 +9,7 @@ import axios from "axios";
 const Discussion = () => {
     const [comments, setComments] = useState(null);
     const [selectedId, setSelectedId] = useState(null);
+    
     // how to get data?
     // 1. useEffect () => http
     // 2. CDM => get
@@ -21,15 +22,24 @@ const Discussion = () => {
         const getComments = async () => {
             try {
                 const { data } = await axios.get(
-                    "https://jsonplaceholder.typicode.com/comments"
+                    "http://localhost:3001/comments"
                 );
-                setComments(data.slice(0 , 4));
+                setComments(data);
             } catch (error) {
                 console.log(error);
             }
         }
         getComments();
-    },[])
+    },[]);
+    const postCommentHandler = (comment) => {
+        axios
+        .post("http://localhost:3001/comments", comment)
+        .then((res) => axios.get("http://localhost:3001/comments"))
+        .then((res) => setComments(res.data))
+        .catch()
+    }
+    
+    
 
 
     /*********** Async - Await *************/
@@ -66,7 +76,7 @@ const Discussion = () => {
                 {comments ? comments.map(c => <Comment key={c.id} name={c.name} email={c.email} onClick={() => selectCommentHandler(c.id)}/>) : <p>loading ...</p>}
             </section>
             <section><FullComment commentId={selectedId}/></section>
-            <section><NewComment /></section>
+            <section><NewComment onAddPost={postCommentHandler}/></section>
         </main>
     );
 }

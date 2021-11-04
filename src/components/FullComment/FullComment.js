@@ -13,14 +13,14 @@ const FullComment = ({commentId}) => {
 
     useEffect(()=>{
         if(commentId){
-            axios.get(`https://jsonplaceholder.typicode.com/comments/${commentId}`)
+            axios.get(`http://localhost:3001/comments/${commentId}`)
             .then(res => setComment(res.data))
             .catch();
         }
     },[commentId]);
     
     const deleteHandler = () => {
-        axios.delete(`https://jsonplaceholder.typicode.com/comments/${commentId}`)
+        axios.delete(`http://localhost:3001/comments/${commentId}`)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
     };
