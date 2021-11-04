@@ -1,12 +1,11 @@
-.fullComment{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #e0e7ff;
-    width: 500px;
-    height: 200px;
-    color: #4338ca;
-    border-radius: 5px;
-    margin: 20px 0;
+.fullComment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #e0e7ff;
+  width: 500px;
+  color: #4338ca;
+  border-radius: 5px;
+  margin: 20px 0;
 }

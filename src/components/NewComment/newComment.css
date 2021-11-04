@@ -8,4 +8,28 @@
   height: 200px;
   color: #4338ca;
   border-radius: 5px;
+  padding: 15px 0;
+}
+.newComment > div {
+  margin-bottom: 20px;
+}
+label {
+  margin-right: 5px;
+}
+input {
+  border: 1px solid #4338ca;
+  color: #fff;
+  color: #4338ca;
+  padding: 5px;
+  border-radius: 15px;
+}
+button {
+  background-color: #4338ca;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  width: 150px;
+  padding: 5px 10px;
+  margin: 20px auto;
 }
