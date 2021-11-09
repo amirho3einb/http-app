@@ -9,6 +9,7 @@ import axios from "axios";
 const Discussion = () => {
     const [comments, setComments] = useState(null);
     const [selectedId, setSelectedId] = useState(null);
+    const [error, setError] = useState(false);
     
     // how to get data?
     // 1. useEffect () => http
@@ -26,7 +27,7 @@ const Discussion = () => {
                 );
                 setComments(data);
             } catch (error) {
-                console.log(error);
+                setError(true);
             }
         }
         getComments();
@@ -70,10 +71,20 @@ const Discussion = () => {
     const selectCommentHandler = (id) => {
         setSelectedId(id);
     }
+    const renderComments = () => {
+        let renderValue = <p>loading ...</p>;
+        if(error){
+            renderValue = <p>fetching data failed !</p>
+        }
+        if(comments && !error){
+            renderValue = comments.map(c => <Comment key={c.id} name={c.name} email={c.email} onClick={() => selectCommentHandler(c.id)}/>)
+        }
+        return renderValue;
+    }
     return ( 
         <main>
             <section>
-                {comments ? comments.map(c => <Comment key={c.id} name={c.name} email={c.email} onClick={() => selectCommentHandler(c.id)}/>) : <p>loading ...</p>}
+                {renderComments()}
             </section>
             <section><FullComment commentId={selectedId}/></section>
             <section><NewComment setComments={setComments}/></section>
