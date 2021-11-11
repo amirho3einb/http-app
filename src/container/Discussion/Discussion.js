@@ -3,7 +3,7 @@ import Comment from "../../components/Comment/Comment";
 import FullComment from "../../components/FullComment/FullComment";
 import NewComment from "../../components/NewComment/NewComment";
 import "./discussion.css";
-import http from '../../services/httpService';
+import { getALLComments } from '../../services/getAllCommentsService';
 import { toast } from 'react-toastify';
 
 
@@ -15,9 +15,7 @@ const Discussion = () => {
     useEffect(()=>{
         const getComments = async () => {
             try {
-                const { data } = await http.get(
-                    "/comments"
-                );
+                const { data } = await getALLComments();
                 setComments(data);
             } catch (error) {
                 setError(true);
