@@ -1,4 +1,4 @@
-import axios from "axios";
+import http from "../../services/httpService";
 import { useState } from "react/cjs/react.development";
 import "./newComment.css";
 const NewComment = ({setComments}) => {
@@ -10,17 +10,17 @@ const NewComment = ({setComments}) => {
     
     // const postCommentHandler = () => {
     //     axios
-    //     .post("http://localhost:3001/comments", comment)
-    //     .then((res) => axios.get("http://localhost:3001/comments"))
+    //     .post("/comments", comment)
+    //     .then((res) => axios.get("/comments"))
     //     .then((res) => setComments(res.data))
     //     .catch()
     // }
     
     const postCommentHandler = async() => {
         try{
-            await axios
-            .post("http://localhost:3001/comments", comment);
-            const {data} = await axios.get("http://localhost:3001/comments");
+            await http
+            .post("/comments", comment);
+            const {data} = await http.get("/comments");
             setComments(data);
         }
         catch(error){}
