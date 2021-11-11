@@ -8,14 +8,24 @@ const NewComment = ({setComments}) => {
         body: "",
     });
     
-    const postCommentHandler = () => {
-        axios
-        .post("http://localhost:3001/comments", comment)
-        .then((res) => axios.get("http://localhost:3001/comments"))
-        .then((res) => setComments(res.data))
-        .catch()
-    }
+    // const postCommentHandler = () => {
+    //     axios
+    //     .post("http://localhost:3001/comments", comment)
+    //     .then((res) => axios.get("http://localhost:3001/comments"))
+    //     .then((res) => setComments(res.data))
+    //     .catch()
+    // }
     
+    const postCommentHandler = async() => {
+        try{
+            await axios
+            .post("http://localhost:3001/comments", comment);
+            const {data} = await axios.get("http://localhost:3001/comments");
+            setComments(data);
+        }
+        catch(error){}
+    }
+
     const changeHandler = (e) => {
         setComment({...comment, [e.target.name] : e.target.value})
     }
