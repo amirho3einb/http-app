@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react/cjs/react.development";
 import "./fullComment.css";
-const FullComment = ({commentId, setComments}) => {
+const FullComment = ({commentId, setComments, setSelectedId}) => {
     const [comment, setComment] = useState(null);
     console.log(commentId);
     const styles = {
@@ -31,6 +31,7 @@ const FullComment = ({commentId, setComments}) => {
             const {data} = await axios.get("http://localhost:3001/comments");
             setComments(data);
             setComment(null);
+            setSelectedId(null);
         }
         catch(error){}
     };

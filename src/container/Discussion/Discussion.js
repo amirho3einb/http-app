@@ -45,7 +45,7 @@ const Discussion = () => {
             <section>
                 {renderComments()}
             </section>
-            <section><FullComment commentId={selectedId} setComments={setComments}/></section>
+            <section><FullComment commentId={selectedId} setComments={setComments} setSelectedId={setSelectedId}/></section>
             <section><NewComment setComments={setComments}/></section>
         </main>
     );
