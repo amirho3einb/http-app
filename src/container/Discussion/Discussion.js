@@ -5,6 +5,7 @@ import NewComment from "../../components/NewComment/NewComment";
 import "./discussion.css";
 import { getALLComments } from '../../services/getAllCommentsService';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 
 const Discussion = () => {
@@ -34,7 +35,16 @@ const Discussion = () => {
             toast.error('there is an error')
         }
         if(comments && !error){
-            renderValue = comments.map(c => <Comment key={c.id} name={c.name} email={c.email} onClick={() => selectCommentHandler(c.id)}/>)
+            renderValue = comments.map(c => (
+                <Link to={`/comment/${c.id}`} key={c.id}>
+                    <Comment 
+                        key={c.id} 
+                        name={c.name} 
+                        email={c.email} 
+                        onClick={() => selectCommentHandler(c.id)}
+                    />
+                </Link>
+            ));
         }
         return renderValue;
     }
@@ -43,8 +53,8 @@ const Discussion = () => {
             <section>
                 {renderComments()}
             </section>
-            <section><FullComment commentId={selectedId} setComments={setComments} setSelectedId={setSelectedId}/></section>
-            <section><NewComment setComments={setComments}/></section>
+            {/* <section><FullComment commentId={selectedId} setComments={setComments} setSelectedId={setSelectedId}/></section> */}
+            {/* <section><NewComment setComments={setComments}/></section> */}
         </main>
     );
 }

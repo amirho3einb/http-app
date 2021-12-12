@@ -1,10 +1,10 @@
 import http from "./httpService";
 
-export function addNewComments(data, token) {
+export function addNewComments(data) {
     const token = 'SECURE TOKEN !';
     const header = {
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer`,
         },
     };
     return http.post("/comments", data, header);

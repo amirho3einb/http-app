@@ -6,7 +6,9 @@ import { deleteComment } from "../../services/deleteCommentService";
 import { getALLComments } from "../../services/getAllCommentsService";
 import { getOneComment } from "../../services/getOneCommentService";
 
-const FullComment = ({commentId, setComments, setSelectedId}) => {
+const FullComment = ({ setComments, setSelectedId, match}) => {
+    //console.log(match.params.id);
+    const commentId = match.params.id;
     const [comment, setComment] = useState(null);
     console.log(commentId);
     const styles = {
