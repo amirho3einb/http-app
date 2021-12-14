@@ -1,10 +1,8 @@
-import http from "../../services/httpService";
 import { useState } from "react/cjs/react.development";
 import "./newComment.css";
-import { getALLComments } from "../../services/getAllCommentsService";
 import { addNewComments } from "../../services/addNewCommentSevice";
 
-const NewComment = ({setComments}) => {
+const NewComment = ({ history }) => {
     const [comment, setComment] = useState({
         name: "",
         email: "",
@@ -22,8 +20,7 @@ const NewComment = ({setComments}) => {
     const postCommentHandler = async() => {
         try{
             await addNewComments({...comment, postId: 10 });
-            const {data} = await getALLComments();
-            setComments(data);
+            history.push("/");
         }
         catch(error){}
     }

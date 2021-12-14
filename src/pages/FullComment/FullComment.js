@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import { useState } from "react/cjs/react.development";
 import "./fullComment.css";
 import { deleteComment } from "../../services/deleteCommentService";
-import { getALLComments } from "../../services/getAllCommentsService";
 import { getOneComment } from "../../services/getOneCommentService";
 
-const FullComment = ({ setComments, setSelectedId, match}) => {
+const FullComment = ({ match, history }) => {
     //console.log(match.params.id);
+    console.log(history);
     const commentId = match.params.id;
     const [comment, setComment] = useState(null);
     console.log(commentId);
@@ -34,10 +34,8 @@ const FullComment = ({ setComments, setSelectedId, match}) => {
     const deleteHandler = async() => {
         try{
             await deleteComment(commentId);
-            const {data} = await getALLComments();
-            setComments(data);
+            history.push("/");
             setComment(null);
-            setSelectedId(null);
         }
         catch(error){}
     };
@@ -50,7 +48,7 @@ const FullComment = ({ setComments, setSelectedId, match}) => {
             <div className="fullComment">
                 <p>name: {comment.name}</p>
                 <p>email: {comment.email}</p>
-                <p>{comment.body}</p>
+                <p>{comment.content}</p>
                 <button onClick={deleteHandler}>Delete</button>
             </div>
         );
