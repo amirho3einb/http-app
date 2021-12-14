@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
-import Comment from "../../components/Comment/Comment";
-import FullComment from "../../components/FullComment/FullComment";
-import NewComment from "../../components/NewComment/NewComment";
-import "./discussion.css";
+import Comment from "./Comment/Comment";
+import FullComment from "../../pages/FullComment/FullComment";
+import NewComment from "../../pages/NewComment/NewComment";
+import "./comments.css";
 import { getALLComments } from '../../services/getAllCommentsService';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 
-const Discussion = () => {
+const CommentsList = () => {
     const [comments, setComments] = useState(null);
-    const [selectedId, setSelectedId] = useState(null);
+    //const [selectedId, setSelectedId] = useState(null);
     const [error, setError] = useState(false);
     
     useEffect(()=>{
@@ -25,9 +25,9 @@ const Discussion = () => {
         getComments();
     },[]);
 
-    const selectCommentHandler = (id) => {
-        setSelectedId(id);
-    }
+    // const selectCommentHandler = (id) => {
+    //     setSelectedId(id);
+    // }
     const renderComments = () => {
         let renderValue = <p>loading ...</p>;
         if(error){
@@ -41,7 +41,7 @@ const Discussion = () => {
                         key={c.id} 
                         name={c.name} 
                         email={c.email} 
-                        onClick={() => selectCommentHandler(c.id)}
+                        // onClick={() => selectCommentHandler(c.id)}
                     />
                 </Link>
             ));
@@ -49,14 +49,10 @@ const Discussion = () => {
         return renderValue;
     }
     return ( 
-        <main>
-            <section>
-                {renderComments()}
-            </section>
-            {/* <section><FullComment commentId={selectedId} setComments={setComments} setSelectedId={setSelectedId}/></section> */}
-            {/* <section><NewComment setComments={setComments}/></section> */}
-        </main>
+        <section>
+            {renderComments()}
+        </section>
     );
 }
  
-export default Discussion;
+export default CommentsList;
